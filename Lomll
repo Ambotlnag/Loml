@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine, Pangga!</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    overflow-x: hidden;
+  }
+
+  .container {
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  h1 {
+    font-size: 3em;
+    color: #ff0066;
+    animation: floatText 2s infinite alternate;
+  }
+
+  .heart {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: red;
+    transform: rotate(-45deg);
+    animation: float 6s linear infinite;
+  }
+  .heart::before,
+  .heart::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: red;
+    border-radius: 50%;
+  }
+  .heart::before {
+    top: -15px;
+    left: 0;
+  }
+  .heart::after {
+    top: 0;
+    left: 15px;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) rotate(-45deg); }
+    100% { transform: translateY(-600px) rotate(-45deg); }
+  }
+
+  @keyframes floatText {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+  }
+
+  button {
+    margin: 20px;
+    padding: 15px 25px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+  }
+
+  .yes { background: #ff6699; color: white; }
+  .no { background: #ccc; color: #333; }
+
+  .note {
+    font-size: 1.5em;
+    margin: 30px 0;
+    color: #800040;
+  }
+
+  .sticker {
+    width: 150px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container" id="page1">
+  <h1>Pangga, will you be my Valentine?</h1>
+  <button class="yes" onclick="nextPage('note1')">Yes 💖</button>
+  <button class="no" onclick="alert('Aww, maybe next time 😢')">No 😢</button>
+</div>
+
+<div class="container" id="note1" style="display:none;">
+  <p class="note">Hi Pangga! 🌸 I love you so much, ikaw akong sunshine sa adlaw-adlaw. 💕</p>
+  <img src="https://i.postimg.cc/8cbBpsPz/bouquet.png" alt="Bouquet" class="sticker">
+  <button onclick="nextPage('note2')">Next ➡️</button>
+</div>
+
+<div class="container" id="note2" style="display:none;">
+  <p class="note">Every time kita magkauban, I feel happy kaayo. You make my heart skip a beat!</p>
+  <button onclick="nextPage('note3')">Next ➡️</button>
+</div>
+
+<div class="container" id="note3" style="display:none;">
+  <p class="note">Pangga, I promise nga I will always be here for you, bisan unsa pa. ❤️</p>
+  <button onclick="nextPage('note4')">Next ➡️</button>
+</div>
+
+<div class="container" id="note4" style="display:none;">
+  <p class="note">Happy Valentine’s Day! You are my heart, my forever pangga. 🌹</p>
+</div>
+
+<script>
+  function nextPage(id) {
+    const pages = document.querySelectorAll('.container');
+    pages.forEach(p => p.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+  }
+
+  // create floating hearts randomly
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 500);
+</script>
+</body>
+</html>
